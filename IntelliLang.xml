@@ -1,0 +1,8 @@
+<application>
+  <component name="LanguageInjectionConfiguration">
+    <injection language="XML" injector-id="xml">
+      <display-name>androidx.constraintlayout.widget.ConstraintLayout</display-name>
+      <place><![CDATA[xmlTag().withLocalName(string().matches("androidx.constraintlayout.widget.ConstraintLayout"))]]></place>
+    </injection>
+  </component>
+</application>

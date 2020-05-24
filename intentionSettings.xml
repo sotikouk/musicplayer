@@ -1,0 +1,6 @@
+<application>
+  <component name="IntentionManagerSettings">
+    <ignoreAction name="XML/Rearrange tag attributes" />
+    <ignoreAction name="Android/Override Resource in Other Configuration..." />
+  </component>
+</application>
