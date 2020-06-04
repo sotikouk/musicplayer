@@ -1,9 +1,11 @@
 package com.example.musicplayer.ui.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,8 +15,10 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.musicplayer.R;
+import com.example.musicplayer.insertActivity;
 
 public class searchFragment extends Fragment {
+    private Button buttonInsert;
 
     private searchViewModel searchViewModel;
 
@@ -30,6 +34,16 @@ public class searchFragment extends Fragment {
                 textView.setText(s);
             }
         });
+        final Intent intent = new Intent(getActivity(), insertActivity.class);
+        final Button button = root.findViewById(R.id.buttonInsert);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
         return root;
+
     }
+
 }
