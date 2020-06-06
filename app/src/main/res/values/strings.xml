@@ -12,4 +12,14 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="add_song">"Add Song</string>
+    <string name="title_of_song">Song Title</string>
+    <string name="singer">Singer</string>
+    <string name="review">Review</string>
+    <string name="time">Release Year</string>
+    <string name="grade">Rating</string>
+    <string name="link">Play</string>
+    <string name="add">Add Song</string>
+    <string name="edit_song">Edit Song</string>
+
 </resources>
