@@ -8,7 +8,7 @@ import android.util.Patterns;
 
 import com.example.musicplayer.data.LoginRepository;
 import com.example.musicplayer.data.Result;
-import com.example.musicplayer.data.model.LoggedInUser;
+import com.example.musicplayer.data.Model.LoggedInUser;
 import com.example.musicplayer.R;
 
 public class LoginViewModel extends ViewModel {

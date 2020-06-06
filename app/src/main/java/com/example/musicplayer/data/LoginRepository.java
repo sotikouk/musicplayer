@@ -1,6 +1,6 @@
 package com.example.musicplayer.data;
 
-import com.example.musicplayer.data.model.LoggedInUser;
+import com.example.musicplayer.data.Model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

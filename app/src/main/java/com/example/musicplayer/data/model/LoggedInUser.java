@@ -1,4 +1,4 @@
-package com.example.musicplayer.data.model;
+package com.example.musicplayer.data.Model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

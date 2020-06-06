@@ -1,6 +1,6 @@
 package com.example.musicplayer.data;
 
-import com.example.musicplayer.data.model.LoggedInUser;
+import com.example.musicplayer.data.Model.LoggedInUser;
 
 import java.io.IOException;
 
