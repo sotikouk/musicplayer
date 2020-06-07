@@ -7,7 +7,6 @@ import java.util.List;
 public class Playlist {
     private String artwork, genre,user;
     private List<Track> trackList;
-    private List<DocumentReference> songs;
     private DocumentReference id;
 
     public String getArtwork() {
@@ -30,12 +29,11 @@ public class Playlist {
         return genre;
     }
 
-    public Playlist(String artwork, String genre, String user, List<Track> trackList, List<DocumentReference> songs, DocumentReference id) {
+    public Playlist(String artwork, String genre, String user, List<Track> trackList, DocumentReference id) {
         this.artwork = artwork;
         this.genre = genre;
         this.user = user;
         this.trackList = trackList;
-        this.songs = songs;
         this.id = id;
     }
 
@@ -59,11 +57,4 @@ public class Playlist {
         this.trackList = trackList;
     }
 
-    public List<DocumentReference> getSongs() {
-        return songs;
-    }
-
-    public void setSongs(List<DocumentReference> songs) {
-        this.songs = songs;
-    }
 }

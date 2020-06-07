@@ -15,7 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.musicplayer.R;
-//import com.example.musicplayer.insertActivity;
+import com.example.musicplayer.insertActivity;
 
 public class searchFragment extends Fragment {
     private Button buttonInsert;
@@ -33,14 +33,14 @@ public class searchFragment extends Fragment {
                 textView.setText(s);
             }
         });
-        //final Intent intent = new Intent(getActivity(), insertActivity.class);
+        final Intent intent = new Intent(getActivity(), insertActivity.class);
         final Button button = root.findViewById(R.id.buttonInsert);
 
-        /*button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(intent);
             }
-        });*/
+        });
         return root;
 
     }

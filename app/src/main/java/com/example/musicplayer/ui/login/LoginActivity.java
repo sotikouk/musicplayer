@@ -29,6 +29,7 @@ import com.example.musicplayer.Helpers.Storage;
 import com.example.musicplayer.MainActivity;
 import com.example.musicplayer.R;
 import com.example.musicplayer.data.Model.Track;
+import com.example.musicplayer.data.Model.User;
 import com.example.musicplayer.ui.home.HomeFragment;
 import com.example.musicplayer.ui.home.HomeViewModel;
 import com.example.musicplayer.ui.login.LoginViewModel;
@@ -61,7 +62,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            Storage.User = mAuth.getCurrentUser();
                             // Sign in success, update UI with the signed-in user's information
+                            CollectionReference genres = fdb.collection("genres");
+                            CollectionReference artists = fdb.collection("artists");
+                            CollectionReference reviews = fdb.collection("reviews");
+
                             CollectionReference tracks = fdb.collection("tracks");
                             Task<QuerySnapshot> query = tracks.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
@@ -73,15 +79,13 @@ public class LoginActivity extends AppCompatActivity {
                                                 //for(Track t: Storage)
                                                 Storage.tracks.add(snapIn.toObject(Track.class));
                                                 Storage.tracks.get(Storage.tracks.size() -1 ).setId(snapIn.getReference());
-
                                             }
                                         }
                                     }
                                 }
                             });
                             Log.d(TAG, "signInWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUiWithUser(user);
+                            updateUiWithUser(Storage.User);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -186,8 +190,8 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser!= null){
+        Storage.User = mAuth.getCurrentUser();
+        if(Storage.User!= null){
             CollectionReference tracks = fdb.collection("tracks");
             Task<QuerySnapshot> query = tracks.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
@@ -205,7 +209,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 }
             });
-            updateUiWithUser(currentUser);
+            updateUiWithUser(Storage.User);
         }
     }
     private void updateUiWithUser(FirebaseUser model) {
