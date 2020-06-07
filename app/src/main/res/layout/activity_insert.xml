@@ -15,9 +15,8 @@
 
     <EditText
         android:id="@+id/title_song"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
         android:layout_marginTop="16dp"
         android:hint="@string/title_of_song"
         android:inputType="text"
@@ -28,7 +27,7 @@
 
     <EditText
         android:id="@+id/singer"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="@string/singer"
@@ -40,7 +39,7 @@
 
     <EditText
         android:id="@+id/review"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="@string/review"
@@ -51,7 +50,7 @@
 
     <EditText
         android:id="@+id/time_of_song"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="@string/time"
@@ -61,7 +60,7 @@
 
     <EditText
         android:id="@+id/grade"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="@string/grade"
@@ -72,9 +71,8 @@
 
     <EditText
         android:id="@+id/link_of_song"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:hint="@string/link"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="@+id/grade"
@@ -82,10 +80,8 @@
 
     <Button
         android:id="@+id/addbutton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="120dp"
         android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
