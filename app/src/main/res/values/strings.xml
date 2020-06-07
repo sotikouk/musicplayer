@@ -16,7 +16,7 @@
     <string name="title_of_song">Song Title</string>
     <string name="singer">Singer</string>
     <string name="review">Review</string>
-    <string name="time">Release Year</string>
+    <string name="time">Duration</string>
     <string name="grade">Rating</string>
     <string name="add">Add Song</string>
     <string name="edit_song">Edit Song</string>
