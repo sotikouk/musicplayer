@@ -162,6 +162,23 @@
             android:layout_height="match_parent"
             android:weightSum="1.0">
 
+            <Button
+                android:id="@+id/editSongButton"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:text="edit" />
+
+            <Button
+                android:id="@+id/deleteSongButton"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:text="delete" />
+
+            <Button
+                android:id="@+id/addToPlaylist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="+ playlist" />
         </LinearLayout>
     </LinearLayout>
 

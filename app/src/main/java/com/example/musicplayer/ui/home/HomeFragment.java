@@ -45,4 +45,32 @@ public class HomeFragment extends Fragment {
         });
         return root;
     }
+
+    private void addPlaylistDialog(){
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        View subView = inflater.inflate(R.layout.add_playlist,null);
+
+        final EditText playlistNameField = subView.findViewById(R.id.addNewPlaylistEditText);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Add new Playlist");
+        builder.setView(subView);
+        builder.create();
+
+        builder.setPositiveButton("Add Playlist", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final String playlistName = playlistNameField.getText().toString().trim();
+                System.out.println(playlistName);
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        builder.show();
+    }
 }
