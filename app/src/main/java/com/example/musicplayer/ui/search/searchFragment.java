@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,8 @@ import com.example.musicplayer.insertActivity;
 
 public class searchFragment extends Fragment {
     private Button buttonInsert;
+    private Button searchButton;
+    private EditText searchEditText;
 
     private searchViewModel searchViewModel;
 
@@ -35,10 +38,19 @@ public class searchFragment extends Fragment {
         });
         final Intent intent = new Intent(getActivity(), insertActivity.class);
         final Button button = root.findViewById(R.id.buttonInsert);
+        final EditText searchField = root.findViewById(R.id.searchEditText);
+        final Button search = root.findViewById(R.id.buttonSearch);
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(intent);
+            }
+        });
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String searchText = searchField.getText().toString().trim();
+                System.out.println(searchText);
             }
         });
         return root;
