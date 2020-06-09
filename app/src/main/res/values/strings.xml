@@ -27,4 +27,5 @@
     <string name="info">Info:</string>
     <string name="link">link:</string>
     <string name="tracktitle">Title:</string>
+    <string name="playlisttitle">Name</string>
 </resources>

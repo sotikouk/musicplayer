@@ -3,14 +3,41 @@ package com.example.musicplayer.data.Model;
 import com.google.firebase.firestore.DocumentReference;
 
 import java.util.List;
+import java.util.Map;
 
 public class Playlist {
-    private String artwork, genre,user;
+    private String artwork, genre,user,name;
+    private Integer duration;
     private List<Track> trackList;
     private DocumentReference id;
+    private List<Map<String, Object>> tracks;
 
     public String getArtwork() {
         return artwork;
+    }
+
+    public List<Map<String, Object>> getTracks() {
+        return tracks;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setTracks(List<Map<String, Object>> tracks) {
+        this.tracks = tracks;
     }
 
     public void setArtwork(String artwork) {
@@ -51,6 +78,9 @@ public class Playlist {
 
     public List<Track> getTrackList() {
         return trackList;
+    }
+
+    public Playlist() {
     }
 
     public void setTrackList(List<Track> trackList) {

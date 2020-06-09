@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -28,7 +29,10 @@ import android.widget.Toast;
 import com.example.musicplayer.Helpers.Storage;
 import com.example.musicplayer.MainActivity;
 import com.example.musicplayer.R;
+import com.example.musicplayer.data.Model.Genre;
+import com.example.musicplayer.data.Model.Playlist;
 import com.example.musicplayer.data.Model.Track;
+import com.example.musicplayer.data.Model.Artist;
 import com.example.musicplayer.data.Model.User;
 import com.example.musicplayer.ui.home.HomeFragment;
 import com.example.musicplayer.ui.home.HomeViewModel;
@@ -39,10 +43,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -53,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
     private LoginViewModel loginViewModel;
     private FirebaseAuth mAuth;
     private FirebaseFirestore fdb;
-
+    private Task<QuerySnapshot> query;
     private static final String TAG = "LoginActivity";
 
     private void SignInFirebase(String username, String password) {
@@ -64,26 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Storage.User = mAuth.getCurrentUser();
                             // Sign in success, update UI with the signed-in user's information
-                            CollectionReference genres = fdb.collection("genres");
-                            CollectionReference artists = fdb.collection("artists");
-                            CollectionReference reviews = fdb.collection("reviews");
-
-                            CollectionReference tracks = fdb.collection("tracks");
-                            Task<QuerySnapshot> query = tracks.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if(task.isSuccessful()){
-                                        if(task.getResult().size()>0){
-                                            Storage.tracks = new ArrayList<>();
-                                            for(QueryDocumentSnapshot snapIn: task.getResult()){
-                                                //for(Track t: Storage)
-                                                Storage.tracks.add(snapIn.toObject(Track.class));
-                                                Storage.tracks.get(Storage.tracks.size() -1 ).setId(snapIn.getReference());
-                                            }
-                                        }
-                                    }
-                                }
-                            });
+                            firebaseData(); //get firebaseData @ Login
                             Log.d(TAG, "signInWithEmail:success");
                             updateUiWithUser(Storage.User);
                         } else {
@@ -186,32 +168,18 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         Storage.User = mAuth.getCurrentUser();
-        if(Storage.User!= null){
-            CollectionReference tracks = fdb.collection("tracks");
-            Task<QuerySnapshot> query = tracks.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if(task.isSuccessful()){
-                        if(task.getResult().size()>0){
-                           // Log.d(TAG, String.valueOf(task.getResult().size()));
-                            Storage.tracks = new ArrayList<>();
-                            for(QueryDocumentSnapshot snapIn: task.getResult()){
-                                Storage.tracks.add(snapIn.toObject(Track.class));
-                                Storage.tracks.get(Storage.tracks.size() -1 ).setId(snapIn.getReference());
-                                //Log.d(TAG, String.valueOf(Storage.tracks.get(0).getArtist()));
-                            }
-                        }
-                    }
-                }
-            });
+        if (Storage.User != null) {
+            firebaseData();
             updateUiWithUser(Storage.User);
         }
     }
+
     private void updateUiWithUser(FirebaseUser model) {
         String welcome = getString(R.string.welcome) + model.getEmail();
         // TODO : initiate successful logged in experience
@@ -220,7 +188,68 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    private void firebaseData() {
+        query = fdb.collection("genres").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().size() > 0) {
+                        Storage.genres = new ArrayList<>();
+                        for (QueryDocumentSnapshot snapIn : task.getResult()) {
+                            Storage.genres.add(snapIn.toObject(Genre.class));
+                            Storage.genres.get(Storage.genres.size() - 1).setId(snapIn.getReference());
+                        }
+                    }
+                }
+            }
+        });
+        query = fdb.collection("artists").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().size() > 0) {
+                        Storage.artists = new ArrayList<>();
+                        for (QueryDocumentSnapshot snapIn : task.getResult()) {
+                            Storage.artists.add(snapIn.toObject(Artist.class));
+                            Storage.artists.get(Storage.artists.size() - 1).setId(snapIn.getReference());
+                        }
+                    }
+                }
+            }
+        });
+        query = fdb.collection("playlists").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().size() > 0) {
+                        Storage.playlists = new ArrayList<>();
+                        for (QueryDocumentSnapshot snapIn : task.getResult()) {
+                            Storage.playlists.add(snapIn.toObject(Playlist.class));
+                            Storage.playlists.get(Storage.playlists.size() - 1).setId(snapIn.getReference());
+                        }
+                    }
+                }
+            }
+        });
+
+        query = fdb.collection("tracks").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().size() > 0) {
+                        Storage.tracks = new ArrayList<>();
+                        for (QueryDocumentSnapshot snapIn : task.getResult()) {
+                            Storage.tracks.add(snapIn.toObject(Track.class));
+                            Storage.tracks.get(Storage.tracks.size() - 1).setId(snapIn.getReference());
+                        }
+                    }
+                }
+            }
+        });
     }
 }

@@ -32,7 +32,6 @@ import java.util.List;
 //import com.example.musicplayer.insertActivity;
 
 public class libraryFragment extends Fragment {
-    private static final String TAG = "LIBRARY FRAGMENT" ;
     private Button buttonEdit;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter ladapter;
@@ -58,7 +57,7 @@ public class libraryFragment extends Fragment {
         recyclerView.setAdapter(ladapter);
         ladapter.notifyDataSetChanged();
 
-       final Intent intent = new Intent(getActivity(), editActivity.class);
+        final Intent intent = new Intent(getActivity(), editActivity.class);
         final Button button = root.findViewById(R.id.buttonEdit);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
