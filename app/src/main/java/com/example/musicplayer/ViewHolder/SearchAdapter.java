@@ -1,18 +1,11 @@
 package com.example.musicplayer.ViewHolder;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,24 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer.Helpers.Storage;
 import com.example.musicplayer.R;
-import com.example.musicplayer.data.Model.Genre;
 import com.example.musicplayer.data.Model.Playlist;
 import com.example.musicplayer.data.Model.Track;
 import com.example.musicplayer.editActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.MyViewHolder> {
     private List<Track> tracks;
     private FirebaseFirestore fdb;
 
@@ -61,7 +49,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyViewHo
         }
     }
 
-    public LibraryAdapter(List<Track> tracks){
+    public SearchAdapter(List<Track> tracks){
        this.tracks =tracks;
     }
     @NonNull
@@ -93,10 +81,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyViewHo
         holder.addToPlaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Track trck =tracks.get(position);
-                LayoutInflater inflater = LayoutInflater.from(view.getContext());
-                View subView = inflater.inflate(R.layout.add_to_playlist,null);
-                addPlaylistDialog(subView,trck);
+
             }
         });
         holder.deleteSong.setOnClickListener(new View.OnClickListener(){
@@ -119,18 +104,13 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyViewHo
                                         }
                                      }
                                 }
-
                             }
                             fdb.document(trck.getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    Storage.tracks.remove(trck);
-                                    tracks.remove(trck);
-                                    notifyItemRemoved(position);
-                                    notifyItemRangeChanged(position, tracks.size());
+                                    Storage.tracks.remove(Storage.tracks.indexOf(trck));
                                 }
                             });
-
                         }
                     }
                 });
@@ -142,43 +122,5 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyViewHo
     public int getItemCount() {
         return tracks.size();
     }
-    private void addPlaylistDialog(View subView, final Track trck){
-        fdb = FirebaseFirestore.getInstance();
 
-        final Spinner playlists = subView.findViewById(R.id.spinnerPlaylist);
-        final List<String> playList=new ArrayList<>();
-        for(Playlist p: Storage.playlists){
-            if(!p.getTracks().contains(fdb.document(trck.getId()))){
-                System.out.println("exists");
-                playList.add(p.getName());
-            }
-        }
-        ArrayAdapter<String> pAdapter = new ArrayAdapter<String>(subView.getContext(),android.R.layout.simple_list_item_1, playList);
-        playlists.setAdapter(pAdapter);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(subView.getContext());
-        builder.setTitle("Add to Playlist");
-        builder.setView(subView);
-        builder.create();
-
-        builder.setPositiveButton("Add to Playlist", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                for(Playlist p: Storage.playlists) {
-                    if(playlists.getSelectedItem().toString().equals(p.getName())){
-                        p.getTracks().add(fdb.document(trck.getId()));
-                        fdb.document(p.getId().getPath()).update("tracks", p.getTracks());
-                    }
-                }
-            }
-        });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-
-        builder.show();
-    }
 }

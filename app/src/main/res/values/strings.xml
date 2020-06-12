@@ -19,15 +19,19 @@
     <string name="time">Duration</string>
     <string name="grade">Rating</string>
     <string name="add">Add Song</string>
+    <string name="update">Update Song</string>
     <string name="edit_song">Edit Song</string>
     <string name="action_sign_out">Sign Out</string>
     <string name="artist">Artist:</string>
     <string name="genre">Genre:</string>
     <string name="rate">Rate:</string>
     <string name="info">Info:</string>
-    <string name="link">link:</string>
+    <string name="link">Link:</string>
     <string name="tracktitle">Title:</string>
     <string name="search_button">Search</string>
     <string name="playlisttitle">Name</string>
-
+    <string name="discuss_about_header">title</string>
+    <string name="genreLabel">Genre</string>
+    <string name="selectgenre">Select Genre</string>
+    <string name="listDelete">Delete</string>
 </resources>

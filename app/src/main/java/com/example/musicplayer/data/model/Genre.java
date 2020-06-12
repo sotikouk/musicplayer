@@ -39,4 +39,9 @@ public class Genre {
     public void setId(DocumentReference id) {
         this.id = id;
     }
+
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

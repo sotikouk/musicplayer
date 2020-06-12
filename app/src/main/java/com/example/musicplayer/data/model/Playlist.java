@@ -1,24 +1,23 @@
 package com.example.musicplayer.data.Model;
 
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.Exclude;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Playlist {
+public class Playlist  implements Serializable {
     private String artwork, genre,user,name;
     private Integer duration;
-    private List<Track> trackList;
+    private List<DocumentReference> tracks;
     private DocumentReference id;
-    private List<Map<String, Object>> tracks;
 
     public String getArtwork() {
         return artwork;
     }
 
-    public List<Map<String, Object>> getTracks() {
-        return tracks;
-    }
 
     public String getName() {
         return name;
@@ -36,9 +35,6 @@ public class Playlist {
         this.name = name;
     }
 
-    public void setTracks(List<Map<String, Object>> tracks) {
-        this.tracks = tracks;
-    }
 
     public void setArtwork(String artwork) {
         this.artwork = artwork;
@@ -56,12 +52,13 @@ public class Playlist {
         return genre;
     }
 
-    public Playlist(String artwork, String genre, String user, List<Track> trackList, DocumentReference id) {
+    public Playlist(String artwork, String genre, String user, String name, List<DocumentReference> tracks, Integer duration) {
         this.artwork = artwork;
         this.genre = genre;
         this.user = user;
-        this.trackList = trackList;
-        this.id = id;
+        this.name = name;
+        this.tracks = tracks;
+        this.duration = duration;
     }
 
     public void setGenre(String genre) {
@@ -76,15 +73,28 @@ public class Playlist {
         this.user = user;
     }
 
-    public List<Track> getTrackList() {
-        return trackList;
+    public List<DocumentReference> getTracks() {
+        return tracks;
     }
 
-    public Playlist() {
-    }
+    public Playlist() { }
 
-    public void setTrackList(List<Track> trackList) {
-        this.trackList = trackList;
+    public void setTracks(List<DocumentReference> tracks) {
+        this.tracks = tracks;
     }
-
+    @Override
+    public String toString(){
+        return this.name;
+    }
+    @Exclude
+    public Map<String, Object> toMap(){
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("artwork",artwork);
+        result.put("duration", duration);
+        result.put("genre",genre);
+        result.put("name",name);
+        result.put("tracks",tracks);
+        result.put("user",user);
+        return result;
+    }
 }

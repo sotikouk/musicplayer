@@ -119,9 +119,9 @@ public class LoginActivity extends AppCompatActivity {
                 if (loginResult.getError() != null) {
                     showLoginFailed(loginResult.getError());
                 }
-               /* if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
-                }*/
+                if (loginResult.getSuccess() != null) {
+                    updateUiWithUser(Storage.User);
+                }
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
@@ -176,7 +176,6 @@ public class LoginActivity extends AppCompatActivity {
         Storage.User = mAuth.getCurrentUser();
         if (Storage.User != null) {
             firebaseData();
-            updateUiWithUser(Storage.User);
         }
     }
 
@@ -194,7 +193,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void firebaseData() {
-        query = fdb.collection("genres").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+    fdb.collection("genres").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -208,7 +207,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        query = fdb.collection("artists").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+       fdb.collection("artists").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -222,7 +221,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-        query = fdb.collection("playlists").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        fdb.collection("playlists").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -232,12 +231,13 @@ public class LoginActivity extends AppCompatActivity {
                             Storage.playlists.add(snapIn.toObject(Playlist.class));
                             Storage.playlists.get(Storage.playlists.size() - 1).setId(snapIn.getReference());
                         }
-                    }
+                    }else Storage.playlists = new ArrayList<>();
+                    updateUiWithUser(Storage.User);
                 }
             }
         });
 
-        query = fdb.collection("tracks").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        fdb.collection("tracks").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -247,7 +247,7 @@ public class LoginActivity extends AppCompatActivity {
                             Storage.tracks.add(snapIn.toObject(Track.class));
                             Storage.tracks.get(Storage.tracks.size() - 1).setId(snapIn.getReference());
                         }
-                    }
+                    }else Storage.tracks = new ArrayList<>();
                 }
             }
         });

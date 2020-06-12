@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="1dp"
-    android:id="@+id/playlistCard"
+    android:id="@+id/addplaylistCard"
     card_view:cardElevation="2dp"
     card_view:cardUseCompatPadding="true">
 
@@ -28,17 +28,6 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="bold" />
-            <TextView
-                android:layout_below="@+id/playlist_name_label"
-                android:id="@+id/playlist_duration_label"
-                android:layout_width="wrap_content"
-                android:text="@string/time"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:textColor="@color/colorBlack"
-                android:textSize="12sp"
-                android:textStyle="normal" />
-
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -51,15 +40,6 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="bold" />
-            <TextView
-                android:layout_below="@+id/playlist_name"
-                android:id="@+id/playlist_duration"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="4"
-                android:textColor="@color/colorBlack"
-                android:textSize="12sp"
-                android:textStyle="normal" />
         </RelativeLayout>
         <LinearLayout
             android:orientation="vertical"
@@ -67,11 +47,6 @@
             android:layout_height="match_parent"
             android:weightSum="1.0">
 
-            <Button
-                android:id="@+id/listDelete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/listDelete" />
         </LinearLayout>
     </LinearLayout>
 

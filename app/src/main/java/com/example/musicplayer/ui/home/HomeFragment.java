@@ -22,12 +22,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicplayer.Helpers.Storage;
 import com.example.musicplayer.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.example.musicplayer.ViewHolder.HomeAdapter;
 import com.example.musicplayer.ViewHolder.LibraryAdapter;
 import com.example.musicplayer.data.Model.Playlist;
 import com.example.musicplayer.data.Model.Track;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeFragment extends Fragment {
@@ -44,7 +53,6 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
         fdb = FirebaseFirestore.getInstance();
-
         recyclerView =  root.findViewById(R.id.playlist_recycler);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(root.getContext());
@@ -66,6 +74,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 addPlaylistDialog();
+                System.out.println("clciked");
             }
         });
         return root;
@@ -86,7 +95,19 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final String playlistName = playlistNameField.getText().toString().trim();
-                System.out.println(playlistName);
+                fdb = FirebaseFirestore.getInstance();
+                List <DocumentReference> tracks =new ArrayList<>();
+                Playlist playlist = new Playlist("","",Storage.User.getUid(),playlistName,tracks,0);
+                Storage.playlists.add(playlist);
+                fdb.collection("playlists").add(playlist).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        if (task.isSuccessful()) {
+                            Storage.playlists.get(Storage.playlists.size()-1).setId(task.getResult());
+                        }
+                    }
+                });
+                playlists = Storage.playlists;
             }
         });
 
@@ -98,4 +119,5 @@ public class HomeFragment extends Fragment {
 
         builder.show();
     }
+
 }

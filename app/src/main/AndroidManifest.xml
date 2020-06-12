@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme" >
         <activity android:name=".editActivity" />
         <activity android:name=".insertActivity" />
+        <activity android:name=".songsInPlaylist" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" >

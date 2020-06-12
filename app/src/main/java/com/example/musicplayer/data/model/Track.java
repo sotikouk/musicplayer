@@ -1,16 +1,20 @@
 package com.example.musicplayer.data.Model;
 
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.Exclude;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class Track {
-        private DocumentReference id;
-        private String  artist,duration,genre,title,url,artwork,review;
-        private Integer numRatings, rating;
+public class Track implements Serializable {
+        private String id;
+        private String  artist,genre,title,url,artwork,review;
+        private Integer numRatings, rating,duration;
         private List<Track> tracks;
 
-        public Track(String artist, String artwork, String duration, String title, String genre, String url, String review, Integer numRatings, Integer rating){
+        public Track(String artist, String artwork, Integer duration, String title, String genre, String url, String review, Integer numRatings, Integer rating){
             this.artist=artist;
             this.artwork=artwork;
             this.duration=duration;
@@ -21,7 +25,7 @@ public class Track {
             this.numRatings=numRatings;
             this.rating=rating;
         }
-        public Track(DocumentReference id, String artist, String artwork, String duration, String title, String genre, String url, String review, Integer numRatings, Integer rating){
+        public Track(String id, String artist, String artwork, Integer duration, String title, String genre, String url, String review, Integer numRatings, Integer rating){
             this.artist=artist;
             this.artwork=artwork;
             this.duration=duration;
@@ -35,12 +39,12 @@ public class Track {
         }
         public Track(){}
 
-    public DocumentReference getId() {
+    public String getId() {
         return id;
     }
 
     public void setId(DocumentReference id) {
-        this.id = id;
+        this.id = id.getPath();
     }
 
     public String getArtist() {
@@ -51,11 +55,11 @@ public class Track {
         this.artist = artist;
     }
 
-    public String getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
@@ -115,4 +119,16 @@ public class Track {
         this.rating = rating;
     }
     public List<Track> getTracks(){return tracks;}
+    @Exclude
+    public Map<String, Object> toMap(){
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("artist",artist);
+        result.put("title", title);
+        result.put("url",url);
+        result.put("rating",rating);
+        result.put("genre",genre);
+        result.put("duration",duration);
+        result.put("review",review);
+        return result;
+    }
 }
