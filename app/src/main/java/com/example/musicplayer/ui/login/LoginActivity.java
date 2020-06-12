@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseFirestore fdb;
     private Task<QuerySnapshot> query;
     private static final String TAG = "LoginActivity";
+    private ProgressBar loadingProgressBar;
 
     private void SignInFirebase(String username, String password) {
         mAuth.signInWithEmailAndPassword(username, password)
@@ -67,13 +68,15 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             firebaseData(); //get firebaseData @ Login
                             Log.d(TAG, "signInWithEmail:success");
-                            updateUiWithUser(Storage.User);
                         } else {
                             // If sign in fails, display a message to the user.
+
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(getApplicationContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-                            updateUiWithUser(null);
+                            loadingProgressBar.setVisibility(View.GONE);
+
+                            //updateUiWithUser(null);
                         }
                     }
                 });
@@ -91,8 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = findViewById(R.id.loading);
-
+        loadingProgressBar=findViewById(R.id.loading);
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -232,6 +234,7 @@ public class LoginActivity extends AppCompatActivity {
                             Storage.playlists.get(Storage.playlists.size() - 1).setId(snapIn.getReference());
                         }
                     }else Storage.playlists = new ArrayList<>();
+                    loadingProgressBar.setVisibility(View.GONE);
                     updateUiWithUser(Storage.User);
                 }
             }

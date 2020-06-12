@@ -73,6 +73,7 @@ public class TracksInPlaylistAdapter extends RecyclerView.Adapter<TracksInPlayli
                 final Track trck =tracks.get(position);
                 fdb = FirebaseFirestore.getInstance();
                 for(Playlist s: Storage.playlists ){
+                    s.setDuration(s.getDuration()-trck.getDuration());
                     s.getTracks().remove(fdb.document(trck.getId()));
                     tracks.remove(trck);
                 }
@@ -85,6 +86,7 @@ public class TracksInPlaylistAdapter extends RecyclerView.Adapter<TracksInPlayli
                                     for(Playlist s: Storage.playlists) {
                                         if(snapIn.getReference().getId().equals(s.getId().getId())){
                                             fdb.document(s.getId().getPath()).update("tracks", s.getTracks());
+                                            fdb.document(s.getId().getPath()).update("duration", s.getDuration());
                                         }
                                      }
                                 }

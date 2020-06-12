@@ -149,7 +149,6 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyViewHo
         final List<String> playList=new ArrayList<>();
         for(Playlist p: Storage.playlists){
             if(!p.getTracks().contains(fdb.document(trck.getId()))){
-                System.out.println("exists");
                 playList.add(p.getName());
             }
         }
@@ -167,7 +166,10 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyViewHo
                 for(Playlist p: Storage.playlists) {
                     if(playlists.getSelectedItem().toString().equals(p.getName())){
                         p.getTracks().add(fdb.document(trck.getId()));
+                        p.setDuration(p.getDuration()+trck.getDuration());
                         fdb.document(p.getId().getPath()).update("tracks", p.getTracks());
+                        fdb.document(p.getId().getPath()).update("duration", p.getDuration());
+
                     }
                 }
             }
