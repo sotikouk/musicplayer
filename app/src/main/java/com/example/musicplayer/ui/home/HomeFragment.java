@@ -104,6 +104,8 @@ public class HomeFragment extends Fragment {
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()) {
                             Storage.playlists.get(Storage.playlists.size()-1).setId(task.getResult());
+                            Toast.makeText(getContext(), "Playlist Added!",
+                                    Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.musicplayer.Helpers.MinMaxF;
 import com.example.musicplayer.Helpers.Storage;
@@ -63,6 +64,8 @@ public class editActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 handleUpdate(track);
+                Toast.makeText(getApplicationContext(), "Edit Done!",
+                        Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

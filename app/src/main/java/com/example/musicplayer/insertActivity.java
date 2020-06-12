@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.musicplayer.Helpers.MinMaxF;
 import com.example.musicplayer.Helpers.Storage;
@@ -55,6 +56,8 @@ public class insertActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 handleAdd();
+                Toast.makeText(getApplicationContext(), "Song Added To Library!",
+                        Toast.LENGTH_SHORT).show();
                 finish();
             }
         });
