@@ -10,15 +10,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_height="152dp"
         android:background="#EBF3F4"
+        android:orientation="horizontal"
         android:padding="12dp">
 
 
         <RelativeLayout
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/song_name_label"
@@ -29,67 +29,74 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+
             <TextView
-                android:layout_below="@+id/song_name_label"
                 android:id="@+id/song_artist_label"
                 android:layout_width="wrap_content"
-                android:text="@string/artist"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_name_label"
                 android:layout_weight="4"
+                android:text="@string/artist"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+
             <TextView
-                android:layout_below="@+id/song_artist_label"
                 android:id="@+id/song_genre_label"
                 android:layout_width="wrap_content"
-                android:text="@string/genre"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_artist_label"
                 android:layout_weight="4"
+                android:text="@string/genre"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+
             <TextView
-                android:layout_below="@+id/song_genre_label"
                 android:id="@+id/song_duration_label"
                 android:layout_width="wrap_content"
-                android:text="@string/time"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_genre_label"
                 android:layout_weight="4"
+                android:text="@string/time"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="normal" />
+
             <TextView
-                android:layout_below="@+id/song_duration_label"
                 android:id="@+id/song_rate_label"
                 android:layout_width="wrap_content"
-                android:text="@string/rate"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_duration_label"
                 android:layout_weight="4"
+                android:text="@string/rate"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="normal" />
+
             <TextView
-                android:layout_below="@+id/song_rate_label"
                 android:id="@+id/song_review_label"
                 android:layout_width="wrap_content"
-                android:text="@string/info"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_rate_label"
                 android:layout_weight="4"
+                android:text="@string/info"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="normal" />
+
             <TextView
-                android:layout_below="@+id/song_review_label"
                 android:id="@+id/song_link_label"
                 android:layout_width="wrap_content"
-                android:text="@string/link"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_review_label"
+                android:text="@string/link"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="normal" />
 
         </RelativeLayout>
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -101,65 +108,72 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+
             <TextView
-                android:layout_below="@+id/song_name"
                 android:id="@+id/song_artist"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_name"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+
             <TextView
-                android:layout_below="@+id/song_artist"
                 android:id="@+id/song_genre"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_artist"
                 android:layout_weight="4"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="bold" />
+
             <TextView
-                android:layout_below="@+id/song_genre"
                 android:id="@+id/song_duration"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_genre"
                 android:layout_weight="4"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="normal" />
+
             <TextView
-                android:layout_below="@+id/song_duration"
                 android:id="@+id/song_rate"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_duration"
                 android:layout_weight="4"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="normal" />
+
             <TextView
-                android:layout_below="@+id/song_rate"
                 android:id="@+id/song_review"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_rate"
                 android:layout_weight="4"
                 android:textColor="@color/colorBlack"
                 android:textSize="12sp"
                 android:textStyle="italic" />
+
             <TextView
-                android:layout_below="@+id/song_review"
                 android:id="@+id/song_link"
-                android:autoLink="all"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/song_review"
                 android:layout_weight="4"
+                android:autoLink="all"
                 android:textColor="@color/colorLinkBlue"
                 android:textSize="12sp"
                 android:textStyle="bold" />
         </RelativeLayout>
+
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:weightSum="1.0">
 
             <Button
@@ -171,7 +185,7 @@
             <Button
                 android:id="@+id/deleteSongButton"
                 android:layout_width="match_parent"
-                android:layout_height="34dp"
+                android:layout_height="wrap_content"
                 android:text="delete" />
 
             <Button
