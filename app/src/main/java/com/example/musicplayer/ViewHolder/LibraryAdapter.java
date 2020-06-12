@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -97,6 +98,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyViewHo
                 LayoutInflater inflater = LayoutInflater.from(view.getContext());
                 View subView = inflater.inflate(R.layout.add_to_playlist,null);
                 addPlaylistDialog(subView,trck);
+
             }
         });
         holder.deleteSong.setOnClickListener(new View.OnClickListener(){
@@ -142,7 +144,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyViewHo
     public int getItemCount() {
         return tracks.size();
     }
-    private void addPlaylistDialog(View subView, final Track trck){
+    private void addPlaylistDialog(final View subView, final Track trck){
         fdb = FirebaseFirestore.getInstance();
 
         final Spinner playlists = subView.findViewById(R.id.spinnerPlaylist);
@@ -169,9 +171,10 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.MyViewHo
                         p.setDuration(p.getDuration()+trck.getDuration());
                         fdb.document(p.getId().getPath()).update("tracks", p.getTracks());
                         fdb.document(p.getId().getPath()).update("duration", p.getDuration());
-
                     }
                 }
+                Toast.makeText(subView.getContext(), "Added to Playlist: "+playlists.getSelectedItem().toString(),
+                        Toast.LENGTH_SHORT).show();
             }
         });
 

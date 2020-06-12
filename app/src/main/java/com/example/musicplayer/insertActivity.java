@@ -55,10 +55,15 @@ public class insertActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                handleAdd();
-                Toast.makeText(getApplicationContext(), "Song Added To Library!",
-                        Toast.LENGTH_SHORT).show();
-                finish();
+                if(rating.getText().toString().equals("")|| duration.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), "Please fill out all fields",
+                            Toast.LENGTH_SHORT).show();
+                }else {
+                    handleAdd();
+                    Toast.makeText(getApplicationContext(), "Song Added To Library!",
+                            Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         });
     }

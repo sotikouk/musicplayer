@@ -88,7 +88,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
                             if (task.isComplete()) {
                                 if (task.isSuccessful()) {
                                     Storage.playlists.remove(playlists.get(position));
-                                    //playlists.remove(position);
+                                    playlists.remove(position);
                                     notifyItemRemoved(position);
                                     notifyItemRangeChanged(position, playlists.size());
                                 }

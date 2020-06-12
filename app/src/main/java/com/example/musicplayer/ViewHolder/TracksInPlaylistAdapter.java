@@ -90,6 +90,8 @@ public class TracksInPlaylistAdapter extends RecyclerView.Adapter<TracksInPlayli
                                         }
                                      }
                                 }
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, tracks.size());
                             }
                         }
                     }
