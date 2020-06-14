@@ -1,14 +1,14 @@
-package com.example.musicplayer.data.model;
+package com.example.musicplayer.data.Model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository
  */
-public class LoggedInUser {
+public class User {
 
     private String userId;
     private String displayName;
 
-    public LoggedInUser(String userId, String displayName) {
+    public User(String userId, String displayName) {
         this.userId = userId;
         this.displayName = displayName;
     }
