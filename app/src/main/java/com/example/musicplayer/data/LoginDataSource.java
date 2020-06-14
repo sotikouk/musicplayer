@@ -1,6 +1,6 @@
 package com.example.musicplayer.data;
 
-import com.example.musicplayer.data.model.LoggedInUser;
+import com.example.musicplayer.data.Model.User;
 
 import java.io.IOException;
 
@@ -9,12 +9,12 @@ import java.io.IOException;
  */
 public class LoginDataSource {
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<User> login(String username, String password) {
 
         try {
             // TODO: handle loggedInUser authentication
-            LoggedInUser fakeUser =
-                    new LoggedInUser(
+            User fakeUser =
+                    new User(
                             java.util.UUID.randomUUID().toString(), username); // Διασύνδεση με την βάση δεδομένων για το user name και password
             return new Result.Success<>(fakeUser);
         } catch (Exception e) {
