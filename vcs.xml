@@ -10,6 +10,10 @@
           <option name="url" value="https://github.com/google-ar/arcore-android-sdk.git" />
           <option name="userName" value="" />
         </UrlAndUserName>
+        <UrlAndUserName>
+          <option name="url" value="https://github.com/dat-ng/ar-location-based-android.git" />
+          <option name="userName" value="" />
+        </UrlAndUserName>
       </list>
     </option>
     <option name="cloneParentDir" value="C:\Users\Sotiris\AndroidStudioProjects" />
