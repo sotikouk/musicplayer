@@ -1,7 +1,7 @@
 <application>
   <component name="FindSettings">
-    <option name="customScope" value="File '...\app\src\androidTest\java\ng\dat\ar\ExampleInstrumentedTest.java [ar-location-based-android-app]'" />
-    <option name="defaultScopeName" value="File '...\app\src\androidTest\java\ng\dat\ar\ExampleInstrumentedTest.java [ar-location-based-android-app]'" />
-    <option name="SEARCH_SCOPE" value="File '...\app\src\androidTest\java\ng\dat\ar\ExampleInstrumentedTest.java [ar-location-based-android-app]'" />
+    <option name="customScope" value="Project 'ar-location-based-android'" />
+    <option name="defaultScopeName" value="Project 'ar-location-based-android'" />
+    <option name="SEARCH_SCOPE" value="Project 'ar-location-based-android'" />
   </component>
 </application>
