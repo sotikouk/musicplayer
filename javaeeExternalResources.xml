@@ -1,0 +1,5 @@
+<application>
+  <component name="ExternalResourceManagerImpl">
+    <resource url="http://schemas.android.com/apk/res/android" location="$USER_HOME$/AndroidStudioProjects/ar-location-based-android" />
+  </component>
+</application>
